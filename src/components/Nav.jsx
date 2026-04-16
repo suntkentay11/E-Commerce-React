@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Nav = () => {
     function openMenu() {
-        document.body.classList += " menu--open";
+        document.body.classList.add("menu--open");
     }
 
     function closeMenu() {
@@ -21,7 +21,7 @@ const Nav = () => {
                     <li><Link to="/books" className='nav__link'>Books</Link></li>
                     <button className='btn__menu' onClick={openMenu}><FontAwesomeIcon icon="bars" /></button>
                     <li className='nav__icon'>
-                        <Link to="/cart" className='nav__icon'><FontAwesomeIcon icon="shopping-cart" /></Link>
+                        <Link to="/cart" className='nav__link'><FontAwesomeIcon icon="shopping-cart" /></Link>
                         <span className='cart__length'>3</span>
                     </li>
                 </ul>
