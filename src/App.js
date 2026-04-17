@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -8,6 +9,38 @@ import { books } from "./data.js";
 import Cart from "./Pages/Cart.jsx";
 
 function App() {
+  const [cart, setCart] = useState([]);
+
+  function addToCart(book) {
+    setCart([...cart, book]);
+    
+    // add multiple quantities of the same book instead of adding duplicates to the cart
+    // const dupItem = cart.find(item => +item.id === +book.id);
+    // if (dupItem) {
+    //   setCart(cart.map(item => {
+    //     if (+item.id === +dupItem.id) {
+    //       return {
+    //         ...item,
+    //         quantity: item.quantity + 1
+    //       }
+    //     }
+    //     else {
+    //       return item;
+    //     }
+    //   }))
+    // }
+    // else {
+    //   setCart([...cart, {
+    //     ...book,
+    //     quantity: 1
+    //   }]);
+    // }
+  }
+
+  useEffect(() => {
+    console.log(cart);
+  }, [cart]);
+
   return (
     <Router>
       <div className="App">
@@ -15,8 +48,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/books" element={ <Books books={books} />} />
-          <Route path="/books/:id" element={<Detail books={books} />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/books/:id" element={<Detail books={books} addToCart={addToCart} />} />
+          <Route path="/cart" element={<Cart books={books} cart={cart} />} />
         </Routes>
         <Footer />
       </div>

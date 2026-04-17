@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { books } from "../data.js";
 import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,18 +6,21 @@ import Recommended from "../components/Recommended.jsx";
 import Rating from "../components/ui/Rating.jsx";
 import Price from "../components/ui/Price.jsx";
 
-const Detail = ({ books }) => {
+const Detail = ({ books, addToCart }) => {
     const { id } = useParams();
     const book = books.find(book => +book.id === +id);
 
-    function addToCart() {
-        console.log(`Added ${book.title} to cart!`);
+    function addBookToCart(book) {
+        addToCart(book);
     }
 
+    function bookExists() {
+        return books.find(book => +book.id === +id);
+    }
 
     return (
         <section id="detail">
-                <div className="container">
+                <div className="books__container">
                     <div className="row">
                         <div className="book__selected--top">
                             <Link to="/books" className="details__back"><FontAwesomeIcon icon="arrow-left" /></Link>
@@ -35,7 +38,11 @@ const Detail = ({ books }) => {
                                 <div className="details__description">{book.description.map((para, i) => (
                                     <p key={i} className="details__para">{para}</p>
                                     ))}</div>
-                                <button className="btn" onClick={addToCart}>Add to Cart</button>
+                                {
+                                bookExists() ? 
+                                <Link to="/cart"><button className="btn" disabled>Checkout</button></Link> : 
+                                (<button className="btn" onClick={() => addBookToCart(book)}>Add to Cart</button>)
+                                }
                             </div>
                         </div>
                         <Recommended />
