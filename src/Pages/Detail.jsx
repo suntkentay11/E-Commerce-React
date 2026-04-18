@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { books } from "../data.js";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Recommended from "../components/Recommended.jsx";
