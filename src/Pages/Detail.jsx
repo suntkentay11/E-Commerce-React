@@ -6,7 +6,7 @@ import Recommended from "../components/Recommended.jsx";
 import Rating from "../components/ui/Rating.jsx";
 import Price from "../components/ui/Price.jsx";
 
-const Detail = ({ books, addToCart }) => {
+const Detail = ({ books, addToCart, cart }) => {
     const { id } = useParams();
     const book = books.find(book => +book.id === +id);
 
@@ -15,12 +15,12 @@ const Detail = ({ books, addToCart }) => {
     }
 
     function bookExists() {
-        return books.find(book => +book.id === +id);
+        return cart.find(item => +item.id === +id);
     }
 
     return (
         <section id="detail">
-                <div className="books__container">
+                <div className="container">
                     <div className="row">
                         <div className="book__selected--top">
                             <Link to="/books" className="details__back"><FontAwesomeIcon icon="arrow-left" /></Link>
@@ -40,7 +40,7 @@ const Detail = ({ books, addToCart }) => {
                                     ))}</div>
                                 {
                                 bookExists() ? 
-                                <Link to="/cart"><button className="btn" disabled>Checkout</button></Link> : 
+                                <Link to="/cart"><button className="btn">Checkout</button></Link> : 
                                 (<button className="btn" onClick={() => addBookToCart(book)}>Add to Cart</button>)
                                 }
                             </div>

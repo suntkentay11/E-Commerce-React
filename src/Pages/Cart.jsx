@@ -1,7 +1,13 @@
 import React from "react";
 import { books } from "../data.js";
+import EmptyCart from "../assets/empty_cart.svg";
+import { Link } from "react-router-dom";
 
-const Cart = () => {
+const Cart = ({ cart, changeQuantity, removeItem }) => {
+    const subTotal = cart.reduce((total, book) => total + (book.salePrice || book.originalPrice) * book.quantity, 0);
+    const tax = subTotal * 0.1;
+    const total = subTotal + tax;
+
     return (
         <section id="cart">
             <div className="books__container">
@@ -16,30 +22,44 @@ const Cart = () => {
                             <span className="cart__price--header">Price</span>
                         </div>
                         <div className="cart__body">
-                            <div className="cart__item">
-                                <div className="cart__book">
-                                    <img src={books[0].url} alt={books[0].title} className="cart__img" />
-                                    <div className="cart__details">
-                                        <h3 className="cart__book--title">{books[0].title}</h3>
-                                        <p className="cart__price">${books[0].price}</p>
-                                        <button className="cart__book--remove">Remove</button>
-                                    </div>
-                                </div>
-                                <div className="cart__quantity">
-                                    <input type="number" min={0} max={99} className="cart__input" />
-                                </div>
-                                <div className="cart__total">
-                                    <span className="cart__total--price">${books[0].price}</span>
-                                </div>
-                            </div>
+                            {
+                                cart.map(book => {
+                                    return (
+                                        <div className="cart__item">
+                                            <div className="cart__book">
+                                                <img src={book.url} alt={book.title} className="cart__img" />
+                                                <div className="cart__details">
+                                                    <h3 className="cart__book--title">{book.title}</h3>
+                                                    <p className="cart__price">${(book.salePrice || book.originalPrice).toFixed(2)}</p>
+                                                    <button className="cart__book--remove" onClick={() => removeItem(book)}>Remove</button>
+                                                </div>
+                                            </div>
+                                            <div className="cart__quantity">
+                                                <input type="number" min={0} max={99} className="cart__input" 
+                                                value ={book.quantity}
+                                                onChange={(e) => changeQuantity(book, e.target.value)} />
+                                            </div>
+                                            <div className="cart__total">
+                                                <span className="cart__total--price">${((book.salePrice || book.originalPrice) * book.quantity).toFixed(2)}</span>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                            
                         </div>
+                        {cart.length === 0 && <div className="cart__empty">
+                            <img src={EmptyCart} alt="Empty Cart" className="cart__empty--img" />
+                            <h2 className="cart__empty--text">Your cart is empty</h2>
+                            <Link to="/books"><button className="btn browse__books">Browse Books</button></Link>
+                        </div>}
                     </div>
-                    <div className="total">
-                        <div className="total__item total__sub-total">Subtotal: ${books[0].price}</div>
-                        <div className="total__item total__tax">Tax: ${books[0].price * 0.1}</div>
-                        <div className="total__item total__price">Total: ${books[0].price * 1.1}</div>
+                    {cart.length > 0 && <div className="total">
+                        <div className="total__item total__sub-total">Subtotal: ${subTotal.toFixed(2)}</div>
+                        <div className="total__item total__tax">Tax: ${tax.toFixed(2)}</div>
+                        <div className="total__item total__price">Total: ${total.toFixed(2)}</div>
                         <button className="btn btn__checkout no-cursor" onClick={() => alert(`Haven't gotten around to doing this :(`)}>Checkout</button>
-                    </div>
+                    </div>}
                 </div>
             </div>
         </section>

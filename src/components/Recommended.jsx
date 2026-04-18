@@ -17,6 +17,8 @@ const Recommended = ({ selectedBook }) => {
                 <div className="books">
                     {books
                         .filter(b => +book.id !== +b.id)
+                        .slice()
+                        .sort (() => Math.random() - 0.5)
                         .slice(0, 4)
                         .map(book => <Book book={book} key={book.id} />)}
                 </div>
