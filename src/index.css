@@ -408,7 +408,6 @@ FEATURES
 
 .book__price{
     font-size: 20px;
-    text-align: center;
     margin-bottom: 8px;
 }
 
@@ -615,6 +614,7 @@ DETAIL
     font-size: 24px;
     color: #7342d6;
     margin-bottom: 6px;
+    text-align: left;
 }
 
 .details__author{

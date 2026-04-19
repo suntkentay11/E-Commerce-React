@@ -33,7 +33,7 @@ const Detail = ({ books, addToCart, cart }) => {
                                 <h1 className="details__title">{book.title}</h1>
                                 <p className="details__author">{book.author}</p>
                                 <Rating rating={book.rating} />
-                                <Price originalPrice={book.originalPrice} salePrice={book.salePrice} />
+                                <Price className="details__price" originalPrice={book.originalPrice} salePrice={book.salePrice} />
                                 <div className="details__description">{book.description.map((para, i) => (
                                     <p key={i} className="details__para">{para}</p>
                                     ))}</div>
