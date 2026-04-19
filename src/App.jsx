@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
+import Nav from "./components/Nav.jsx";
+import Footer from "./components/Footer.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./Pages/Home";
-import Books from "./Pages/Books";
-import Detail from "./Pages/Detail";
+import Home from "./Pages/Home.jsx";
+import Books from "./Pages/Books.jsx";
+import Detail from "./Pages/Detail.jsx";
 import { books } from "./data.js";
 import Cart from "./Pages/Cart.jsx";
 
