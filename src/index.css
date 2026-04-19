@@ -365,6 +365,7 @@ FEATURES
 
 .book {
     display: flex;
+    text-align: center;
     padding: 10px;
     width: calc( 100% / 4 - 20px );
     flex-direction: column;
@@ -401,7 +402,6 @@ FEATURES
 .rating{
     font-size: 16px;
     color: gold;
-    text-align: center;
     margin: 6px 0;
     padding: 8px 0;
 }
@@ -607,6 +607,7 @@ DETAIL
 .details__content{
     display: flex;
     flex-direction: column;
+    text-align: left;
     max-width: 500px;
 }
 
@@ -614,14 +615,12 @@ DETAIL
     font-size: 24px;
     color: #7342d6;
     margin-bottom: 6px;
-    text-align: center;
 }
 
 .details__author{
     font-size: 16px;
     color: #777;
     margin: 8px 0;
-    text-align: center;
 }
 
 .details__description{
@@ -630,6 +629,7 @@ DETAIL
     gap: 16px;
     margin-bottom: 16px;
     font-size: 12px;
+    text-align: left;
 }
 
 /* 
