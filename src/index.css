@@ -178,7 +178,7 @@ LANDING
 }
 
 header {
-    height: calc(100vh - 80px);
+    height: 110vh;
 }
 
 .header__container{
@@ -203,7 +203,7 @@ header {
 h1{
     font-size: 48px;
     color:#7342d6;
-    margin-bottom: 32px;
+    margin: 32px 0;
     text-align: center;
 }
 
